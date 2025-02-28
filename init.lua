@@ -1,0 +1,7 @@
+require "config.lazy"
+require "config.colorscheme"
+require "config.keys"
+require "config.lualine"
+require "config.nvim-tree"
+require "config.options"
+require "config.autocommands"
