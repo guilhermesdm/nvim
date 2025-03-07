@@ -1,7 +1,6 @@
-require "config.lazy"
-require "config.colorscheme"
-require "config.keys"
-require "config.lualine"
-require "config.nvim-tree"
-require "config.options"
-require "config.autocommands"
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("config.mappings")
+require("config.options")
+require("plugins")
