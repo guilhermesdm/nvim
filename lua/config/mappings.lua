@@ -1,5 +1,6 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
+local silent = { silent = true }
 
 -- Move text up and down
 keymap("n", "<A-k>", ":m .-2<CR>==", opts)
@@ -13,29 +14,42 @@ keymap({ "n", "x", "o" }, "sl", "<Plug>(leap-from-window)")
 keymap("n", "<leader>w", vim.cmd.w, { desc = "Save" })
 keymap("n", "<leader>q", vim.cmd.exit, { desc = "Exit" })
 
--- Neo tree
-keymap("n", "<C-e>", "<cmd> Neotree toggle <CR>")
+-- Buffers
+keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", silent)
+keymap("n", "gn", ":bn<CR>", silent)
+keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", silent)
+keymap("n", "gp", ":bp<CR>", silent)
+keymap("n", "<S-q>", ":lua Snacks.bufdelete()<CR>", silent)
 
--- Telescope
-keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "find files" })
-keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "find grep" })
-keymap(
-	"n",
-	"<leader>fr",
-	"<cmd>lua require('telescope').extensions.recent_files.pick()<CR>",
-	{ desc = "recent files", noremap = true, silent = true }
-)
+-- LSP
+keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)
+keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)
+keymap("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", silent)
+keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
+keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
+keymap("n", "<leader>cf", "<cmd>lua require('config.lsp.functions').format()<CR>", silent)
+keymap("v", "<leader>cf", function()
+  local start_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, "<"))
+  local end_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, ">"))
 
--- Spectre
-keymap("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-	desc = "Toggle Spectre",
-})
-keymap("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-	desc = "Search current word",
-})
-keymap("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-	desc = "Search current word",
-})
-keymap("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-	desc = "Search on current file",
-})
+  vim.lsp.buf.format({
+    range = {
+      ["start"] = { start_row, 0 },
+      ["end"] = { end_row, 0 },
+    },
+    async = true,
+  })
+end, silent)
+keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
+keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
+keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
+keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
+keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
+keymap("n", "K", function()
+  local winid = require("ufo").peekFoldedLinesUnderCursor()
+  if not winid then
+    vim.lsp.buf.hover()
+  end
+end)
