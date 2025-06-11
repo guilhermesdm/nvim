@@ -1,9 +1,6 @@
-local snippet_trigger_text = ";"
-
 return {
   {
     'saghen/blink.cmp',
-    lazy = false, -- lazy loading handled internally
     version = "*",
     dependencies = {
       {
@@ -12,7 +9,6 @@ return {
       },
       "rafamadriz/friendly-snippets",
       "fang2hou/blink-copilot",
-      -- "David-Kunz/cmp-npm",
       {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
@@ -25,20 +21,13 @@ return {
       },
     },
 
-    -- use a release tag to download pre-built binaries
-    -- version = 'v0.*',
-    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
 
     ---@module 'blink.cmp'
     opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- see the "default configuration" section below for full documentation on how to define
-      -- your own keymap.
+
+      cmdline = {},
+
       keymap = {
         preset = 'super-tab',
         ["<S-k>"] = { "scroll_documentation_up", "fallback" },
@@ -58,14 +47,7 @@ return {
       },
 
       sources = {
-        default = {
-          'lsp',
-          'path',
-          'snippets',
-          'buffer',
-          'codecompanion',
-          'copilot',
-        },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'codecompanion', 'copilot' },
 
         providers = {
           codecompanion = {
@@ -91,21 +73,16 @@ return {
               return items
             end,
           },
+
         }
+
       },
 
       completion = {
         trigger = {
-          -- When true, will show the completion window after typing a trigger character
           show_on_trigger_character = true,
-          -- When both this and show_on_trigger_character are true, will show the completion window
-          -- when the cursor comes after a trigger character when entering insert mode
           show_on_insert_on_trigger_character = true,
-          -- List of trigger characters (on top of `show_on_blocked_trigger_characters`) that won't trigger
-          -- the completion window when the cursor comes after a trigger character when
-          -- entering insert mode/accepting an item
           show_on_x_blocked_trigger_characters = { "'", '"', '(', '{' },
-          -- or a function, similar to show_on_blocked_trigger_character
         },
         menu = {
           border = "rounded",

@@ -20,7 +20,7 @@ local prompts = {
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = false,
+    enabled = true,
     branch = "canary",
     event = "VeryLazy",
     opts = {

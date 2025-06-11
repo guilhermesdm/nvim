@@ -27,7 +27,7 @@ return {
         },
         previewers = {
           git = {
-            native = true, -- use native (terminal) or Neovim for previewing git diffs and commits
+            native = true,
           },
         },
         win = {
@@ -65,7 +65,6 @@ return {
       -- ╰─────────────────────────────────────────────────────────╯
       { "<leader>e",       function() Snacks.picker.explorer() end,                                desc = "explorer" },
       { "<C-p>",       function() Snacks.picker.smart() end,                                   desc = "smart files" },
-      { "<S-p>",       function() Snacks.picker.grep() end,                                    desc = "grep" },
       { "<leader>pw",  function() Snacks.picker.grep_word() end,                               desc = "grep word",                   mode = { "n", "v" } },
 
       { "<leader>pl",  function() Snacks.picker.projects() end,                                desc = "projects list" },
@@ -80,6 +79,7 @@ return {
       { "<leader>fq",  function() Snacks.picker.qflist() end,                                  desc = "quickfix list" },
       { "<leader>fc",  function() Snacks.picker.colorschemes() end,                            desc = "color schemes" },
       { "<leader>fd",  function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "dotfiles" },
+      { "<leader>fg",  function() Snacks.picker.grep() end,                                    desc = "grep" },
 
       { "<leader>gf",  function() Snacks.picker.git_files() end,                               desc = "git files" },
       { "<leader>gs",  function() Snacks.picker.git_status() end,                              desc = "git status" },
