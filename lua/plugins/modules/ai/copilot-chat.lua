@@ -21,7 +21,7 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     enabled = true,
-    branch = "canary",
+    branch = "main",
     event = "VeryLazy",
     opts = {
       show_help = "no",
