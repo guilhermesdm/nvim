@@ -55,6 +55,7 @@ return {
       { "<Leader>br",  "<cmd>BufferLineCloseRight<CR>",              desc = "Close Right" },
       { "<Leader>bn",  "<cmd>BufferLineMoveNext<CR>",                desc = "Move next" },
       { "<Leader>bp",  "<cmd>BufferLinePick<CR>",                    desc = "Pick Buffer" },
+      { "<Leader>bc",  "<cmd>BufferLinePickClose<CR>",                    desc = "Pick close Buffer" },
       { "<Leader>bP",  "<cmd>BufferLineTogglePin<CR>",               desc = "Pin/Unpin Buffer" },
       { "<Leader>bsd", "<cmd>BufferLineSortByDirectory<CR>",         desc = "Sort by directory" },
       { "<Leader>bse", "<cmd>BufferLineSortByExtension<CR>",         desc = "Sort by extension" },

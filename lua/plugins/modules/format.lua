@@ -19,7 +19,7 @@ return {
           sql = { "sql-formatter" },
           svelte = { "prettierd", "prettier", stop_after_first = true },
           typescript = { "prettierd", "prettier", stop_after_first = true },
-          typescriptreact = { { "prettierd", "prettier" } },
+          typescriptreact = { "prettierd", "prettier", stop_after_first = true },
           yaml = { "prettier" },
           xml = { "xmlformatter" }
         },

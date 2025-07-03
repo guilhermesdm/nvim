@@ -1,35 +1,27 @@
 return {
   {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-    dependencies = {
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
-    config = function()
-      require('config.lsp.setup')
-      require('config.lsp.config')
-      require('config.lsp.functions')
-    end
+    'mason-org/mason.nvim',
+    opts = {},
   },
 
   {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    keys = {
-      { "<leader>cm", "<cmd>Mason<CR>", desc = "Mason" },
+    'mason-org/mason-lspconfig.nvim',
+    opts = {
+      ensure_installed = {
+        'lua_ls',
+        'pyright',
+        'eslint',
+        'rust_analyzer',
+        'clangd',
+      },
     },
   },
 
   {
-    "antosha417/nvim-lsp-file-operations",
-    event = "LspAttach",
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-tree/nvim-tree.lua" },
-    },
+    'neovim/nvim-lspconfig',
     config = function()
-      require("lsp-file-operations").setup()
-    end
+      local lspconfig = require 'lspconfig'
+      lspconfig.harper_ls.setup { filetypes = { 'markdown' } }
+    end,
   },
 }

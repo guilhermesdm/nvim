@@ -1,36 +1,38 @@
+local filetypes = {
+  'javascript',
+  'javascriptreact',
+  'typescript',
+  'typescriptreact',
+}
+
 return {
   {
     "pmizio/typescript-tools.nvim",
+    ft = filetypes,
     event = "LspAttach",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
       {
         "saghen/blink.cmp",
-        -- Ensure blink.cmp is loaded before typescript-tools
         lazy = false,
         priority = 1000,
       }
     },
-  },
-
-  {
-    "razak17/tailwind-fold.nvim",
     opts = {
-      min_chars = 50,
-    },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
-  },
-
-  {
-    "MaximilianLloyd/tw-values.nvim",
-    keys = {
-      { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
-    },
-    opts = {
-      border = "rounded", -- Valid window border style,
-      show_unknown_classes = true                   -- Shows the unknown classes popup
+      filetypes = filetypes,
+      settings = {
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = 'all',
+          includeCompletionsForModuleExports = true,
+          quotePreference = 'auto',
+          autoImportFileExcludePatterns = { '**/node_modules/@radix-ui/**' },
+        },
+        tsserver_format_options = {
+          allowIncompleteCompletions = false,
+          allowRenameOfImportPath = false,
+        },
+      }
     }
   },
 
