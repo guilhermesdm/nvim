@@ -16,14 +16,4 @@ require("lazy").setup({
 		{ import = "plugins.modules" },
 		{ import = "plugins.modules.ai" },
 	},
-
-	install = {
-		missing = true,
-		colorscheme = { "tokyonight" },
-	},
-	performance = {
-		rtp = {
-			disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
-		},
-	},
 })

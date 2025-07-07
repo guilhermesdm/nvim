@@ -71,33 +71,6 @@ return {
 		"stevearc/dressing.nvim",
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
-		{
-			"zbirenbaum/copilot.lua",
-			cmd = "Copilot",
-			event = "InsertEnter",
-			config = function()
-				require("copilot").setup({
-					panels = { enabled = false },
-					suggestion = {
-						enabled = true,
-						auto_trigger = true,
-						hide_during_completion = true,
-						debounce = 75,
-						keymap = {
-							accept = "<C-M-y>",
-							accept_word = false,
-							accept_line = false,
-							next = "<C-M-n>",
-							prev = "<C-M-p>",
-							dismiss = "<C-Esc>",
-						},
-					},
-					filetypes = {
-						["*"] = false,
-					},
-				})
-			end,
-		},
 	},
 	keys = {
 		{
